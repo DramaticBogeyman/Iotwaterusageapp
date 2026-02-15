@@ -14,20 +14,20 @@ export function AIInsights() {
     {
       id: '1',
       type: 'alert',
-      message: 'Unusual flow detected at 3:00 AM (2.5 L/min). Possible leak.',
-      timestamp: 'Today, 3:00 AM',
+      message: 'جریان غیرعادی در ساعت ۳:۰۰ بامداد شناسایی شد (۲.۵ لیتر/دقیقه). احتمال نشتی.',
+      timestamp: 'امروز، ۳:۰۰ بامداد',
     },
     {
       id: '2',
       type: 'success',
-      message: 'Weekly water usage is 12% lower than your neighborhood average.',
-      timestamp: 'Yesterday',
+      message: 'مصرف آب هفتگی ۱۲٪ کمتر از میانگین محله شماست.',
+      timestamp: 'دیروز',
     },
     {
       id: '3',
       type: 'info',
-      message: 'Projected monthly bill: $45.20 based on current usage patterns.',
-      timestamp: 'Just now',
+      message: 'پیش‌بینی قبض ماهانه: ۴۵.۲۰ دلار بر اساس الگوی مصرف فعلی.',
+      timestamp: 'همین الان',
     },
   ]);
 
@@ -42,12 +42,12 @@ export function AIInsights() {
         <div>
           <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-indigo-500" />
-            AI Analytics
+            تحلیل هوشمند
           </h3>
-          <p className="text-sm text-slate-500">Smart insights & alerts</p>
+          <p className="text-sm text-slate-500">بینش و هشدارهای هوشمند</p>
         </div>
         <div className="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-xs font-semibold">
-          LIVE
+          زنده
         </div>
       </div>
       
@@ -74,7 +74,7 @@ export function AIInsights() {
       
       <div className="p-4 bg-slate-50 border-t border-slate-100 text-center">
         <button className="text-sm text-indigo-600 font-medium hover:text-indigo-700">
-          View all 12 insights
+          مشاهده همه ۱۲ بینش
         </button>
       </div>
     </motion.div>

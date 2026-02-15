@@ -35,7 +35,7 @@ export function MetricCard({ title, value, unit, trend, icon: Icon, color = 'blu
           <p className="text-sm font-medium text-slate-500">{title}</p>
           <div className="mt-2 flex items-baseline">
             <span className="text-3xl font-bold text-slate-900">{value}</span>
-            <span className="ml-1 text-sm font-medium text-slate-500">{unit}</span>
+            <span className="mr-1 text-sm font-medium text-slate-500">{unit}</span>
           </div>
         </div>
         <div className={twMerge('p-3 rounded-lg', colorStyles[color])}>
@@ -50,9 +50,9 @@ export function MetricCard({ title, value, unit, trend, icon: Icon, color = 'blu
               trend > 0 ? 'text-red-600' : 'text-emerald-600'
             )}
           >
-            {trend > 0 ? '+' : ''}{trend}%
+            {trend > 0 ? '+' : ''}{trend}٪
           </span>
-          <span className="ml-2 text-slate-500">vs last week</span>
+          <span className="mr-2 text-slate-500">نسبت به هفته پیش</span>
         </div>
       )}
     </motion.div>

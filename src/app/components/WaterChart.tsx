@@ -35,10 +35,10 @@ export function WaterChart() {
       className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 h-[400px]"
     >
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-slate-900">Water Usage Today</h3>
-        <p className="text-sm text-slate-500">Hourly consumption (Liters)</p>
+        <h3 className="text-lg font-semibold text-slate-900">مصرف آب امروز</h3>
+        <p className="text-sm text-slate-500">مصرف ساعتی (لیتر)</p>
       </div>
-      <div className="h-[300px] w-full">
+      <div className="h-[300px] w-full" dir="ltr">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={data}
