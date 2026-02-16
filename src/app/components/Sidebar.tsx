@@ -7,22 +7,26 @@ import {
   Settings, 
   Bell, 
   LogOut, 
-  X
+  X,
+  User
 } from 'lucide-react';
 import { clsx } from 'clsx';
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  activePage: string;
+  onNavigate: (page: string) => void;
 }
 
-export function Sidebar({ isOpen, onClose }: SidebarProps) {
+export function Sidebar({ isOpen, onClose, activePage, onNavigate }: SidebarProps) {
   const menuItems = [
-    { icon: LayoutDashboard, label: 'داشبورد', active: true },
-    { icon: Droplets, label: 'جریان زنده', active: false },
-    { icon: BarChart3, label: 'تحلیل‌ها', active: false },
-    { icon: Bell, label: 'اعلان‌ها', active: false },
-    { icon: Settings, label: 'تنظیمات', active: false },
+    { id: 'dashboard', icon: LayoutDashboard, label: 'داشبورد' },
+    { id: 'live-flow', icon: Droplets, label: 'جریان زنده' },
+    { id: 'analytics', icon: BarChart3, label: 'تحلیل‌ها' },
+    { id: 'notifications', icon: Bell, label: 'اعلان‌ها' },
+    { id: 'account', icon: User, label: 'حساب کاربری' },
+    { id: 'settings', icon: Settings, label: 'تنظیمات' },
   ];
 
   return (
@@ -54,7 +58,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             </div>
             <div>
               <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400">
-                آکواسنس
+                نوا فلو
               </h1>
               <p className="text-xs text-slate-400">پایش هوشمند آب</p>
             </div>
@@ -67,10 +71,14 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         <nav className="flex-1 py-6 px-3 space-y-1">
           {menuItems.map((item) => (
             <button
-              key={item.label}
+              key={item.id}
+              onClick={() => {
+                onNavigate(item.id);
+                if (window.innerWidth < 768) onClose();
+              }}
               className={clsx(
                 "w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium",
-                item.active
+                activePage === item.id
                   ? "bg-blue-600/20 text-blue-400"
                   : "text-slate-400 hover:bg-slate-800 hover:text-white"
               )}

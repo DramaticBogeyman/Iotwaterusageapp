@@ -1,7 +1,7 @@
 
-  # IoT Water Usage App
+  # IoTWaterUsageApp
 
-  This is a code bundle for IoT Water Usage App. The original project is available at https://www.figma.com/design/Sh65gwPBNNAqKYqKeqnINC/IoT-Water-Usage-App.
+  This is a code bundle for IoTWaterUsageApp. The original project is available at https://www.figma.com/design/Sh65gwPBNNAqKYqKeqnINC/IoTWaterUsageApp.
 
   ## Running the code
 

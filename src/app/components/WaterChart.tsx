@@ -38,8 +38,8 @@ export function WaterChart() {
         <h3 className="text-lg font-semibold text-slate-900">مصرف آب امروز</h3>
         <p className="text-sm text-slate-500">مصرف ساعتی (لیتر)</p>
       </div>
-      <div className="h-[300px] w-full" dir="ltr">
-        <ResponsiveContainer width="100%" height="100%">
+      <div className="w-full" style={{ height: 300 }} dir="ltr">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
           <AreaChart
             data={data}
             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
