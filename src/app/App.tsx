@@ -6,13 +6,21 @@ import { WaterChart } from './components/WaterChart';
 import { AIInsights } from './components/AIInsights';
 import { Notifications } from './components/Notifications';
 import { Account } from './components/Account';
+import { Login } from './components/Login';
+import { Analytics } from './components/Analytics';
+import { Settings } from './components/Settings';
 import { Droplets, Activity, CalendarClock, Waves, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isAddDeviceModalOpen, setIsAddDeviceModalOpen] = useState(false);
   const [activePage, setActivePage] = useState('dashboard');
+
+  if (!isAuthenticated) {
+    return <Login onLogin={() => setIsAuthenticated(true)} />;
+  }
 
   const renderContent = () => {
     switch (activePage) {
@@ -21,7 +29,9 @@ export default function App() {
       case 'account':
         return <Account />;
       case 'settings':
-        return <Account />; // Using Account component for Settings for now as per request
+        return <Settings />;
+      case 'analytics':
+        return <Analytics />;
       case 'dashboard':
       default:
         return (
@@ -132,6 +142,7 @@ export default function App() {
         onClose={() => setIsSidebarOpen(false)} 
         activePage={activePage}
         onNavigate={setActivePage}
+        onLogout={() => setIsAuthenticated(false)}
       />
       
       <main className="md:mr-64 min-h-screen flex flex-col">

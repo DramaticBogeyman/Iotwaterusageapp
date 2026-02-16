@@ -17,12 +17,12 @@ interface SidebarProps {
   onClose: () => void;
   activePage: string;
   onNavigate: (page: string) => void;
+  onLogout: () => void;
 }
 
-export function Sidebar({ isOpen, onClose, activePage, onNavigate }: SidebarProps) {
+export function Sidebar({ isOpen, onClose, activePage, onNavigate, onLogout }: SidebarProps) {
   const menuItems = [
     { id: 'dashboard', icon: LayoutDashboard, label: 'داشبورد' },
-    { id: 'live-flow', icon: Droplets, label: 'جریان زنده' },
     { id: 'analytics', icon: BarChart3, label: 'تحلیل‌ها' },
     { id: 'notifications', icon: Bell, label: 'اعلان‌ها' },
     { id: 'account', icon: User, label: 'حساب کاربری' },
@@ -90,7 +90,10 @@ export function Sidebar({ isOpen, onClose, activePage, onNavigate }: SidebarProp
         </nav>
 
         <div className="p-4 border-t border-slate-800">
-          <button className="flex items-center gap-3 w-full p-3 rounded-lg hover:bg-slate-800 transition-colors text-slate-400 hover:text-white text-sm font-medium">
+          <button 
+            onClick={onLogout}
+            className="flex items-center gap-3 w-full p-3 rounded-lg hover:bg-slate-800 transition-colors text-slate-400 hover:text-white text-sm font-medium"
+          >
             <LogOut className="w-5 h-5" />
             خروج
           </button>
