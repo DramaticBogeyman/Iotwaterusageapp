@@ -4,9 +4,10 @@ import { Droplets, User, Lock, ArrowLeft } from 'lucide-react';
 
 interface LoginProps {
   onLogin: () => void;
+  onRegister: () => void;
 }
 
-export function Login({ onLogin }: LoginProps) {
+export function Login({ onLogin, onRegister }: LoginProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -101,10 +102,16 @@ export function Login({ onLogin }: LoginProps) {
             </button>
           </form>
 
-          <div className="mt-6 text-center">
-            <a href="#" className="text-sm text-slate-400 hover:text-blue-600 transition-colors">
+          <div className="mt-6 text-center space-y-3">
+            <a href="#" className="block text-sm text-slate-400 hover:text-blue-600 transition-colors">
               رمز عبور خود را فراموش کرده‌اید؟
             </a>
+            <button
+              onClick={onRegister}
+              className="text-sm text-slate-400 hover:text-blue-600 transition-colors"
+            >
+              حساب کاربری ندارید؟ <span className="font-bold">ثبت نام</span>
+            </button>
           </div>
         </div>
       </motion.div>

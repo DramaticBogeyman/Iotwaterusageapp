@@ -7,19 +7,36 @@ import { AIInsights } from './components/AIInsights';
 import { Notifications } from './components/Notifications';
 import { Account } from './components/Account';
 import { Login } from './components/Login';
+import { Register } from './components/Register';
+import { QRScanner } from './components/QRScanner';
 import { Analytics } from './components/Analytics';
 import { Settings } from './components/Settings';
-import { Droplets, Activity, CalendarClock, Waves, X } from 'lucide-react';
+import { Droplets, Activity, CalendarClock, Waves, X, QrCode } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isAddDeviceModalOpen, setIsAddDeviceModalOpen] = useState(false);
+  const [isQRScannerOpen, setIsQRScannerOpen] = useState(false);
   const [activePage, setActivePage] = useState('dashboard');
 
   if (!isAuthenticated) {
-    return <Login onLogin={() => setIsAuthenticated(true)} />;
+    if (showRegister) {
+      return (
+        <Register
+          onRegister={() => setIsAuthenticated(true)}
+          onBackToLogin={() => setShowRegister(false)}
+        />
+      );
+    }
+    return (
+      <Login
+        onLogin={() => setIsAuthenticated(true)}
+        onRegister={() => setShowRegister(true)}
+      />
+    );
   }
 
   const renderContent = () => {
@@ -173,50 +190,72 @@ export default function App() {
               >
                 <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
                   <h3 className="font-semibold text-slate-900">افزودن دستگاه جدید</h3>
-                  <button 
+                  <button
                     onClick={() => setIsAddDeviceModalOpen(false)}
                     className="text-slate-400 hover:text-slate-600"
                   >
                     <X size={20} />
                   </button>
                 </div>
-                <div className="p-6 space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">نام دستگاه</label>
-                    <input 
-                      type="text" 
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-                      placeholder="مثلاً: سنسور حمام"
-                    />
+
+                <div className="p-6">
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    <button
+                      onClick={() => {
+                        setIsAddDeviceModalOpen(false);
+                        setIsQRScannerOpen(true);
+                      }}
+                      className="flex flex-col items-center justify-center gap-3 p-6 border-2 border-blue-500 bg-blue-50 rounded-xl hover:bg-blue-100 transition-colors group"
+                    >
+                      <QrCode className="w-8 h-8 text-blue-600" />
+                      <span className="text-sm font-medium text-blue-900">اسکن QR Code</span>
+                    </button>
+                    <button
+                      className="flex flex-col items-center justify-center gap-3 p-6 border-2 border-slate-200 bg-white rounded-xl hover:bg-slate-50 transition-colors group"
+                    >
+                      <Droplets className="w-8 h-8 text-slate-600" />
+                      <span className="text-sm font-medium text-slate-700">ورود دستی</span>
+                    </button>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">مکان</label>
-                    <select className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all bg-white">
-                      <option>انتخاب مکان...</option>
-                      <option>زیرزمین</option>
-                      <option>آشپزخانه</option>
-                      <option>حمام</option>
-                      <option>باغچه</option>
-                      <option>پارکینگ</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">شناسه دستگاه / شماره سریال</label>
-                    <input 
-                      type="text" 
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-mono text-sm"
-                      placeholder="XXXX-XXXX-XXXX"
-                    />
+
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">نام دستگاه</label>
+                      <input
+                        type="text"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                        placeholder="مثلاً: سنسور حمام"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">مکان</label>
+                      <select className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all bg-white">
+                        <option>انتخاب مکان...</option>
+                        <option>زیرزمین</option>
+                        <option>آشپزخانه</option>
+                        <option>حمام</option>
+                        <option>باغچه</option>
+                        <option>پارکینگ</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">شناسه دستگاه / شماره سریال</label>
+                      <input
+                        type="text"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-mono text-sm"
+                        placeholder="XXXX-XXXX-XXXX"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end gap-3">
-                  <button 
+                  <button
                     onClick={() => setIsAddDeviceModalOpen(false)}
                     className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-slate-900"
                   >
                     انصراف
                   </button>
-                  <button 
+                  <button
                     onClick={() => setIsAddDeviceModalOpen(false)}
                     className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm shadow-blue-600/20"
                   >
@@ -226,6 +265,19 @@ export default function App() {
               </motion.div>
             </motion.div>
           </>
+        )}
+      </AnimatePresence>
+
+      {/* QR Scanner */}
+      <AnimatePresence>
+        {isQRScannerOpen && (
+          <QRScanner
+            onClose={() => setIsQRScannerOpen(false)}
+            onDeviceScanned={(deviceId) => {
+              console.log('Device scanned:', deviceId);
+              setIsQRScannerOpen(false);
+            }}
+          />
         )}
       </AnimatePresence>
     </div>
